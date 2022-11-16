@@ -1,4 +1,4 @@
-# firechat-vue
+# vuk-web-blog
 
 ## Project setup
 ```
