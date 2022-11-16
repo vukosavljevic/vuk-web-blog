@@ -1,0 +1,16 @@
+<template>
+    <div>
+        <slot></slot>
+    </div>
+</template>
+
+<style scoped>    
+    div{
+        margin-bottom: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width:60%;
+    }
+</style>
