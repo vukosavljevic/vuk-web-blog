@@ -1,5 +1,5 @@
 <template>
-    <page-card v-if="loggedInStatus">
+    <page-card v-if="loggedInStatus === true">
         <h1>U succesfully logged in Admin Page!</h1>
     <p>Congrats</p>
     <form>
@@ -22,7 +22,10 @@ export default{
         }
     },
     computed : {
-        ...mapGetters(['loggedInStatus'])
+        loggedInStatus(){
+            return this.$store.getters.loggedStatus;
+        }
+        //...mapGetters(['loggedInStatus'])
     }
 }
 </script>

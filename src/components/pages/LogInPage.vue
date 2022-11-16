@@ -37,7 +37,7 @@ export default {
         logIn() {
             if (this.enteredName === this.trueName) {
                 if (this.enteredPass === this.truePass) {
-                    this.$store.state.loggedInStatus = true;
+                    this.$store.commit('switchLoggedInStatus');
                 }
             }
         }

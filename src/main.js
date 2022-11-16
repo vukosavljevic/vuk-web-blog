@@ -27,6 +27,16 @@ const store = createStore({
             loggedInStatus : false
         }
     },
+    mutations : {
+        switchLoggedInStatus(state){
+          state.loggedInStatus = true;
+        }
+    },
+    actions : {
+        switchLoggedInStatus(context){
+            context.commit('switchLoggedInStatus')
+        }
+    },
     getters : {
         loggedStatus(state){
             return state.loggedInStatus;

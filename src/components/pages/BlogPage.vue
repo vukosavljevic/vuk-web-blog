@@ -10,7 +10,8 @@
     </page-card>
 </template>
 <script>
-import SinglePost from '../UI/SinglePost.vue'
+import SinglePost from '../UI/SinglePost.vue';
+
 export default {
     components: {
         SinglePost
