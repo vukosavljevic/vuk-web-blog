@@ -6,16 +6,17 @@
                     <h1>{{ title }}</h1>
                     <p>{{ description }}</p>
                 </div>
-                <img :src="require('@/assets/'+ img + '')" alt="">
+                  <img :src="img" alt="">
             </div>
         </router-link>
     </page-card>
 </template>
 <script>
 export default {
-    props: ['id','title','description', 'img'],
+    props: ['id','title','description','img'],
     data() {
         return {
+        
         }
     }
 }

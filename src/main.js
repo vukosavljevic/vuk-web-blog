@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
 import { createStore } from 'vuex';
-import App from './App.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import App from './App.vue';
 
 import AboutPage from './components/pages/AboutPage.vue';
 import BlogPage from './components/pages/BlogPage.vue';
@@ -24,31 +24,38 @@ const router = createRouter({
 const store = createStore({
     state() {
         return {
-            loggedInStatus : false
+            loggedInStatus: false
         }
     },
-    mutations : {
-        switchLoggedInStatus(state){
-          state.loggedInStatus = true;
+    mutations: {
+        switchLoggedInStatus(state) {
+            state.loggedInStatus = true;
+        },
+        sendData(state,payload){
+          
         }
     },
-    actions : {
-        switchLoggedInStatus(context){
+    actions: {
+        switchLoggedInStatus(context) {
             context.commit('switchLoggedInStatus')
+        },
+        sendData(context){
+
         }
     },
-    getters : {
-        loggedStatus(state){
+    getters: {
+        loggedStatus(state) {
             return state.loggedInStatus;
         }
     }
 })
+
 const app = createApp(App);
 
 app.component('base-card', BaseCard);
 app.component('page-card', PageCard);
 
-app.use(router);
 app.use(store);
+app.use(router);
 
 app.mount('#app')

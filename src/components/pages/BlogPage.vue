@@ -6,11 +6,12 @@
         <featured-post></featured-post>
         <h3>Other posts</h3>
             <single-post v-for="post in posts" :key="post.id" :id="post.id" :title="post.title"
-                :description="post.description" :img="post.img"></single-post>
+                :description="post.description" :img="post.image"></single-post>
+                <button @click="showData">As</button>
     </page-card>
 </template>
 <script>
-import SinglePost from '../UI/SinglePost.vue';
+import SinglePost from '@/components/UI/SinglePost.vue';
 
 export default {
     components: {
@@ -18,28 +19,33 @@ export default {
     },
     data() {
         return {
-            posts: [
-                {
-                    id: 0,
-                    title: 'Seeding',
-                    description: 'Dummy text',
-                    img:'teacup-g419241556_1920.jpg'
-                }, 
-                {
-                    id: 1,
-                    title: 'Seeding',
-                    description: 'Dummy text',
-                    img:'teacup-g419241556_1920.jpg'
-                },
-                {
-                    id: 2,
-                    title: 'Seeding',
-                    description: 'Dummy text',
-                    img:'teacup-g419241556_1920.jpg'
-                }
-            ]
+            posts : []
         }
+    },
+    methods : {
+        showData() {
+        fetch('https://vue-vuk-blog-default-rtdb.firebaseio.com/blogPosts.json')
+        .then(function(response){
+            if(response.ok){
+                return response.json();
+            }
+        }
+        )
+        .then((data) => { 
+            const allPosts = [];
+            for(const id in data) {
+                allPosts.push({
+                    id: new Date().valueOf(),
+                    title : data[id].title,
+                    description : data[id].description,
+                    image : data[id].image
+                });
+            }
+            this.posts = allPosts;
+        })
     }
+    }
+    
 }
 </script>
 <style scoped>

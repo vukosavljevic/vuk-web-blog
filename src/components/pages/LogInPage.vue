@@ -1,7 +1,7 @@
 <template>
     <div class="form" v-if="!loggedStatus">
         <h1>Log in</h1>
-            <form @submit.prevent="logIn()">
+        <form @submit.prevent="logIn()">
             <div class="form-control">
                 <label>Name</label>
                 <input type="text" v-model="enteredName" />
@@ -29,7 +29,7 @@ export default {
         return {
             enteredName: '',
             enteredPass: '',
-            trueName: 'Domagoj',
+            trueName: '123',
             truePass: '123'
         }
     },
@@ -38,11 +38,15 @@ export default {
             if (this.enteredName === this.trueName) {
                 if (this.enteredPass === this.truePass) {
                     this.$store.commit('switchLoggedInStatus');
+                    console.log(this.loggedStatus);
                 }
             }
         }
     },
     computed: {
+        // loggedStatus(){
+        //     return this.$store.getters(['loggedStatus'])
+        // }
         ...mapGetters(['loggedStatus'])
     }
 }
