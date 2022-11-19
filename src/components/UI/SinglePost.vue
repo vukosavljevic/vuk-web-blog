@@ -1,6 +1,7 @@
 <template>
     <page-card>
-        <router-link to="/about">
+        <post-card>
+            <router-link :to="'/blog/' + this.title ">
             <div class="picture">
                 <div class="overlay">
                     <h1>{{ title }}</h1>
@@ -9,20 +10,18 @@
                   <img :src="img" alt="">
             </div>
         </router-link>
+        </post-card>
     </page-card>
 </template>
 <script>
 export default {
     props: ['id','title','description','img'],
-    data() {
-        return {
-        
-        }
-    }
 }
 </script>
 <style scoped>
 .picture {
+    width:5rem;
+    height: 5rem;
     position: relative;
     width: 100%;
     height: 100%;
@@ -33,6 +32,7 @@ export default {
 img {
     width: 100%;
     height: 100%;
+    background-size: cover;
 }
 
 .picture:hover {

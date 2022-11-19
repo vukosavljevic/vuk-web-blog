@@ -7,9 +7,11 @@ import AboutPage from './components/pages/AboutPage.vue';
 import BlogPage from './components/pages/BlogPage.vue';
 import LogInPage from './components/pages/LogInPage.vue';
 import AdminPage from './components/pages/AdminPage.vue';
+import LoadedPost from './components/UI/LoadedPost.vue';
 
 import BaseCard from './components/utilities/BaseCard.vue';
 import PageCard from './components/utilities/PageCard.vue';
+import PostCard from './components/utilities/PostCard.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,7 +20,8 @@ const router = createRouter({
         { path: '/blog', component: BlogPage },
         { path: '/about', component: AboutPage },
         { path: '/login', component: LogInPage},
-        { path: '/admin', component: AdminPage}
+        { path: '/admin', component: AdminPage},
+        { path: '/blog/:title', component : LoadedPost}
     ]
 });
 const store = createStore({
@@ -54,6 +57,7 @@ const app = createApp(App);
 
 app.component('base-card', BaseCard);
 app.component('page-card', PageCard);
+app.component('post-card', PostCard);
 
 app.use(store);
 app.use(router);

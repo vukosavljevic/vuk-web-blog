@@ -1,51 +1,65 @@
 <template>
     <page-card>
-        <div>
-            <h3>Featured Post</h3>
-        </div>
-        <featured-post></featured-post>
-        <h3>Other posts</h3>
+
+        <h3>Posts</h3>
+        <post-item v-if="coutSomething()">
             <single-post v-for="post in posts" :key="post.id" :id="post.id" :title="post.title"
                 :description="post.description" :img="post.image"></single-post>
-                <button @click="showData">As</button>
+        </post-item>
+        <post-item v-else>
+            <p>There is no posts yet</p>
+        </post-item>
     </page-card>
 </template>
 <script>
-import SinglePost from '@/components/UI/SinglePost.vue';
 
+import SinglePost from '@/components/UI/SinglePost.vue';
+import PostItem from '../utilities/PostItem.vue';
 export default {
     components: {
-        SinglePost
+        SinglePost,
+        PostItem
     },
     data() {
         return {
-            posts : []
+            posts: [],
         }
     },
-    methods : {
+    methods: {
         showData() {
-        fetch('https://vue-vuk-blog-default-rtdb.firebaseio.com/blogPosts.json')
-        .then(function(response){
-            if(response.ok){
-                return response.json();
+            fetch('https://vue-vuk-blog-default-rtdb.firebaseio.com/blogPosts.json')
+                .then(function (response) {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                })
+                .then((data) => {
+                    const allPosts = [];
+                    for (const id in data) {
+                        allPosts.push({
+                            id: new Date().valueOf(),
+                            title: data[id].title,
+                            description: data[id].description,
+                            image: data[id].image
+                        });
+                    }
+                    this.posts = allPosts;
+                })
+        },
+        coutSomething() {
+            if (this.posts.length > 0) {
+                return true
+            }
+            else {
+                return false
             }
         }
-        )
-        .then((data) => { 
-            const allPosts = [];
-            for(const id in data) {
-                allPosts.push({
-                    id: new Date().valueOf(),
-                    title : data[id].title,
-                    description : data[id].description,
-                    image : data[id].image
-                });
-            }
-            this.posts = allPosts;
-        })
+    },
+
+    mounted() {
+        this.showData();
     }
-    }
-    
+
 }
 </script>
 <style scoped>
@@ -53,9 +67,11 @@ export default {
     height: 400px;
     width: 600px;
 }
-.posts{
-    margin-top:2rem;
+
+.posts {
+    margin-top: 2rem;
 }
+
 h1 {
     font-weight: bold;
 }

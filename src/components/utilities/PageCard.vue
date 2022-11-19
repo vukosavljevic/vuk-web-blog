@@ -11,6 +11,5 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        max-width:60%;
     }
 </style>
