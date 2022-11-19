@@ -4,3 +4,10 @@
         <p>&copy; Vukosavljević 2022</p>
     </div>
 </template>
+
+<style scoped>
+div{
+    color:black;
+}
+</style>
+

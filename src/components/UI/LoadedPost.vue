@@ -24,22 +24,20 @@ export default {
             .then((data) => {
                 const allPosts = [];
                 for (const id in data) {
-                    allPosts.push({
+                    allPosts.unshift({
                         id: new Date().valueOf(),
+                        date: new Date(),
                         title: data[id].title,
                         description: data[id].description,
                         image: data[id].image
                     });
                 }
                 this.posts = allPosts;
-                console.log(this)
                 const postTeam = this.$route.params.title;
                 const selectedPost = this.posts.find(post => post.title === postTeam);
-                console.log(selectedPost)
                 this.newTitle = selectedPost.title;
                 this.newDescription = selectedPost.description;
                 this.newImage = selectedPost.image;
-                console.log(this.newTitle);
             })
     }
 }

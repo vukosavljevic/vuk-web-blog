@@ -51,12 +51,11 @@ export default {
     }
 }
 </script>
-
 <style scoped>
 .form {
-    color: #034159;
+    color: white;
     margin: 5rem 0rem;
-    background-color: #02735E;
+    background-color: #0a2b38;
     padding: 5rem;
     box-shadow: .5rem .5rem 0 white;
 }

@@ -4,13 +4,13 @@
         <hr>
         <ul>
             <li>
-                <router-link to="/blog">Blog</router-link>
+                <router-link to="/blog" :class="{ active: isActiveBlog}" @click="activeClassBlog()">Blog</router-link>
             </li>
             <li>
-                <router-link to='/about'>About</router-link>
+                <router-link to='/about' :class="{ active: isActiveAbout}" @click="activeClassAbout()">About</router-link>
             </li>
             <li v-if="loggedStatus">
-                <router-link to="/admin">Edit Page</router-link>
+                <router-link to="/admin" :class="{ active: isActiveAdmin}" @click="activeClassAdmin()">Edit Page</router-link>
             </li>
         </ul>
     </nav>
@@ -18,14 +18,41 @@
 <script>
 import { mapGetters } from 'vuex';
 export default {
+    data(){
+        return {
+            isActiveBlog : false,
+            isActiveAbout : false,
+            isActiveAdmin : false
+        }
+    },
+    methods :{
+        activeClassBlog(){
+            this.isActiveBlog = true;
+            this.isActiveAbout = false;
+            this.isActiveAdmin = false;
+        },
+        activeClassAbout(){
+            this.isActiveAbout = true;
+            this.isActiveBlog = false;
+            this.isActiveAdmin = false;
+        },
+        activeClassAdmin(){
+            this.isActiveBlog = false;
+            this.isActiveAbout = false;
+            this.isActiveAdmin = true;
+        }
+    },
     computed : {
         ...mapGetters(['loggedStatus'])
     }
 }
 </script>
 <style scoped lang="css">
+.active{
+    color:white !important;
+}
 h1{
-    color:white;
+    color:black;
     font-size:2rem;
 }
 ul {
@@ -34,15 +61,17 @@ ul {
     padding-left: 0 !important;
 }
 hr{
-    color: aqua;
     border:1px solid black;
 }
 a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-size:1.5rem;
+    font-weight: 700;
 }
-
+a:active{
+    color:white;
+}
 li:nth-child(1) {
     padding-left: 0 !important;
 }

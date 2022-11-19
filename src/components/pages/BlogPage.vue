@@ -1,10 +1,9 @@
 <template>
     <page-card>
-
-        <h3>Posts</h3>
-        <post-item v-if="coutSomething()">
-            <single-post v-for="post in posts" :key="post.id" :id="post.id" :title="post.title"
-                :description="post.description" :img="post.image"></single-post>
+        <h3>Other Posts</h3>
+        <post-item v-if="showPosts()">
+            <single-post v-for="post in posts" :key="post.id" :id="post.id" :title="post.title" :img="post.image" :date="post.date">
+            </single-post>
         </post-item>
         <post-item v-else>
             <p>There is no posts yet</p>
@@ -36,8 +35,9 @@ export default {
                 .then((data) => {
                     const allPosts = [];
                     for (const id in data) {
-                        allPosts.push({
+                        allPosts.unshift({
                             id: new Date().valueOf(),
+                            date: new Date(),
                             title: data[id].title,
                             description: data[id].description,
                             image: data[id].image
@@ -46,7 +46,7 @@ export default {
                     this.posts = allPosts;
                 })
         },
-        coutSomething() {
+        showPosts() {
             if (this.posts.length > 0) {
                 return true
             }
@@ -77,6 +77,7 @@ h1 {
 }
 
 h3 {
+    color:black;
     text-align: left;
     font-weight: bold;
     font-size: 2rem;

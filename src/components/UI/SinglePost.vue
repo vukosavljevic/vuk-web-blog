@@ -1,32 +1,50 @@
 <template>
     <page-card>
         <post-card>
-            <router-link :to="'/blog/' + this.title ">
-            <div class="picture">
-                <div class="overlay">
-                    <h1>{{ title }}</h1>
-                    <p>{{ description }}</p>
+            <router-link :to="'/blog/' + this.title">
+                <div class="picture">
+                    <div class="overlay">
+                        <h1>{{ title }}</h1>
+                        <li> {{ this.newdate }}</li>
+                    </div>
+                    <img :src="img" alt="">
                 </div>
-                  <img :src="img" alt="">
-            </div>
-        </router-link>
+            </router-link>
         </post-card>
     </page-card>
 </template>
 <script>
 export default {
-    props: ['id','title','description','img'],
+    props: ['id', 'title', 'img', 'date'],
+    data(){
+        return {
+            newdate : null
+        }
+    },
+    methods: {
+        convertingTime() {
+            let dateObj = this.date;
+            let month = dateObj.getUTCMonth() + 1; //months from 1-12
+            let day = dateObj.getUTCDate();
+            let year = dateObj.getUTCFullYear();
+
+            this.newdate = year + "/" + month + "/" + day;
+        }
+    },
+    created(){
+        this.convertingTime();
+    }
 }
 </script>
 <style scoped>
 .picture {
-    width:5rem;
+    width: 5rem;
     height: 5rem;
     position: relative;
     width: 100%;
     height: 100%;
-    box-shadow: .75rem .75rem 0 white;
     transition: 0.5s ease-out;
+    box-shadow: 0 0 0 0;
 }
 
 img {
@@ -36,7 +54,7 @@ img {
 }
 
 .picture:hover {
-    box-shadow: 0 0 0 0;
+    box-shadow: 0.75rem 0.75rem 0 white;
 }
 
 .overlay {
