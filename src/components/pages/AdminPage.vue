@@ -1,10 +1,12 @@
 <template>
     <page-card v-if="loggedStatus">
         <h1>U succesfully logged in Admin Page!</h1>
-        <p>Congrats</p>
         <form @submit.prevent="sendData">
+            <label>Title</label>
             <input type="text" v-model="title" />
+            <label>Description</label>
             <textarea v-model="description" />
+            <label>Image</label>
             <input type="file" @change="onFilePicked">
             <button>Submit</button>
         </form>
@@ -18,13 +20,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import axios from 'axios';
+
 export default {
     data() {
         return {
             title: '',
             description: '',
             image: null,
-            imageUrl : ''
+            imageUrl: ''
         }
     },
     computed: {
@@ -36,34 +39,38 @@ export default {
             this.imageUpload = (event.target.files[0]);
 
         },
-        onFilePicked(event){
+        onFilePicked(event) {
             const files = event.target.files;
             let filename = files[0].name;
             const fileReader = new FileReader()
-            fileReader.addEventListener('load', () =>{
+            fileReader.addEventListener('load', () => {
                 this.imageUrl = fileReader.result
             })
             fileReader.readAsDataURL(files[0]);
             this.image = files[0];
         },
         sendData() {
-            console.log(this.imageUrl)
             // this.$store.dispatch('sendData',{
             //     id: this.id,
             //     title : this.title,
             //     description : this.description,
             //     img : this.img
             // });
-            axios.post('https://vue-vuk-blog-default-rtdb.firebaseio.com/blogPosts.json', {
-                title: this.title,
-                description: this.description,
-                image: this.imageUrl
-            });
-            this.title = '',
-            this.description = ''
-            this.imageUrl = ''
+            if (this.title === '' || this.description === '' || this.image === null) {
+                console.log('upisi nesto')
+            }
+            else {
+                axios.post('https://vue-vuk-blog-default-rtdb.firebaseio.com/blogPosts.json', {
+                    title: this.title,
+                    description: this.description,
+                    image: this.imageUrl
+                });
+                this.title = '',
+                this.description = ''
+                this.imageUrl = ''
+            }
         },
-       submitImage() {
+        submitImage() {
             // console.log(this.imageUpload)
             // if (this.imageUpload === null) {
             //     console.log('lool')
@@ -75,10 +82,10 @@ export default {
             // })
             // fileReader.readAsDataURL(this.imageUpload)
             // console.log(this.imageUrl)
-                // const imageRef = ref(storage, 'images/' + this.imageUpload.name + new Date().toISOString() );
-                // console.log(imageRef)
-                // uploadBytes(imageRef, this.imageUpload).then(() => {
-                // alert('image uploaded')
+            // const imageRef = ref(storage, 'images/' + this.imageUpload.name + new Date().toISOString() );
+            // console.log(imageRef)
+            // uploadBytes(imageRef, this.imageUpload).then(() => {
+            // alert('image uploaded')
         }
     }
 
@@ -87,7 +94,20 @@ export default {
 
 <style scoped>
 form {
+    padding: 2rem;
+    background-color:black;
     display: flex;
     flex-direction: column;
+}
+label{
+    text-align: left;
+    font-size:2rem;
+}
+input{
+    width: 50%;
+    margin-bottom: 1rem;
+}
+button{
+    width: 50%;
 }
 </style>

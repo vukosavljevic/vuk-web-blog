@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <h1>Vuk Web Dev</h1>
+        <h1>Junior Vuk</h1>
         <hr>
         <ul>
             <li>
@@ -20,7 +20,7 @@ import { mapGetters } from 'vuex';
 export default {
     data(){
         return {
-            isActiveBlog : false,
+            isActiveBlog : true,
             isActiveAbout : false,
             isActiveAdmin : false
         }
@@ -49,7 +49,7 @@ export default {
 </script>
 <style scoped lang="css">
 .active{
-    color:white !important;
+    color:red !important;
 }
 h1{
     color:black;

@@ -64,5 +64,7 @@ export default {
 img {
     height: auto;
     width: 400px;
+    padding:2rem;
+    border-right: 2px solid black;
 }
 </style>

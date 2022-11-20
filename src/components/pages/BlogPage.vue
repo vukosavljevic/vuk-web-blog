@@ -6,7 +6,6 @@
             <single-post v-for="recentPost in recentPosts" :key="recentPost.id" :id="recentPost.id"
                 :title="recentPost.title" :img="recentPost.image" :date="recentPost.date">
             </single-post>
-
         </post-item>
         <post-item v-else>
             <p>Loading posts...</p>

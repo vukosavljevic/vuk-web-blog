@@ -5,7 +5,10 @@
                 <div class="picture">
                     <div class="overlay">
                         <h1>{{ title }}</h1>
-                        <li> {{ this.newdate }}</li>
+                        <div class="overlay-text">
+                            <li> {{ this.newDate }}</li>
+                             <p> - By Domagoj</p>
+                        </div>
                     </div>
                     <img :src="img" alt="">
                 </div>
@@ -18,7 +21,7 @@ export default {
     props: ['id', 'title', 'img', 'date'],
     data(){
         return {
-            newdate : null
+            newDate : null
         }
     },
     methods: {
@@ -28,7 +31,7 @@ export default {
             let day = dateObj.getUTCDate();
             let year = dateObj.getUTCFullYear();
 
-            this.newdate = year + "/" + month + "/" + day;
+            this.newDate = year + "/" + month + "/" + day;
         }
     },
     created(){
@@ -43,10 +46,18 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: 0.5s ease-out;
+    transition: 0.3s ease-in;
     box-shadow: 0 0 0 0;
 }
-
+li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay-text{
+    display: flex;
+    gap:1rem;
+}
 img {
     width: 100%;
     height: 100%;
@@ -54,7 +65,7 @@ img {
 }
 
 .picture:hover {
-    box-shadow: 0.75rem 0.75rem 0 white;
+    box-shadow: 0.75rem 0.75rem 0 red;
 }
 
 .overlay {
