@@ -1,7 +1,14 @@
 <template>
-    <h1> {{ newTitle }}</h1>
-    <p> {{ newDescription }}</p>
-    <img :src="newImage" alt="">
+    <div class="container">
+        <div class="flex">
+            <img :src="newImage" alt="">
+            <div class="container-text">
+                <h1> {{ newTitle }}</h1>
+                <p> {{ newDescription }}</p>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <script>
@@ -43,6 +50,19 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.flex {
+    display: flex;
+    gap: 1rem;
+}
+.container{
+    width: 80%;
+}
+.container-text{
+    text-align: left;
+}
+img {
+    height: auto;
+    width: 400px;
+}
 </style>

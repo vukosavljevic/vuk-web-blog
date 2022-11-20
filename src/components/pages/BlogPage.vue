@@ -1,12 +1,25 @@
 <template>
     <page-card>
-        <h3>Other Posts</h3>
+        <h3>Newest post</h3>
+        <hr>
         <post-item v-if="showPosts()">
-            <single-post v-for="post in posts" :key="post.id" :id="post.id" :title="post.title" :img="post.image" :date="post.date">
+            <single-post v-for="recentPost in recentPosts" :key="recentPost.id" :id="recentPost.id"
+                :title="recentPost.title" :img="recentPost.image" :date="recentPost.date">
+            </single-post>
+
+        </post-item>
+        <post-item v-else>
+            <p>Loading posts...</p>
+        </post-item>
+        <h3>Other Posts</h3>
+        <hr>
+        <post-item v-if="showPosts()">
+            <single-post v-for="post in posts" :key="post.id" :id="post.id" :title="post.title" :img="post.image"
+                :date="post.date">
             </single-post>
         </post-item>
         <post-item v-else>
-            <p>There is no posts yet</p>
+            <p>Loading posts...</p>
         </post-item>
     </page-card>
 </template>
@@ -22,6 +35,7 @@ export default {
     data() {
         return {
             posts: [],
+            recentPosts: []
         }
     },
     methods: {
@@ -34,6 +48,7 @@ export default {
                 })
                 .then((data) => {
                     const allPosts = [];
+                    let i = 0;
                     for (const id in data) {
                         allPosts.unshift({
                             id: new Date().valueOf(),
@@ -42,8 +57,10 @@ export default {
                             description: data[id].description,
                             image: data[id].image
                         });
+                        i++
                     }
-                    this.posts = allPosts;
+                    this.recentPosts = allPosts.slice(0, 1)
+                    this.posts = allPosts.slice(1, i);
                 })
         },
         showPosts() {
@@ -76,8 +93,15 @@ h1 {
     font-weight: bold;
 }
 
+hr {
+    border: 1px solid black;
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
 h3 {
-    color:black;
+    margin-bottom: 0;
+    color: black;
     text-align: left;
     font-weight: bold;
     font-size: 2rem;
